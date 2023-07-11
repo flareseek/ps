@@ -40,17 +40,17 @@
 for(int i = 1; i <= N; i++) {
   while(top != -1 && stack[top] == A[index]) {
     top--;
-				index++;
-				sb.append("-\n");
+    index++;
+    sb.append("-\n");
   }
   stack[++top] = i;
   sb.append("+\n");
+}
 
 while(top != -1 && stack[top] == A[index]) {
-			top--;
-			index++;
-			sb.append("-\n");
-		}
+  top--;
+  index++;
+  sb.append("-\n");
 }
  ```
 
