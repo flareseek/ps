@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
   public static void main(String[] args) throws IOException {
@@ -7,22 +7,25 @@ public class Main {
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     int N = Integer.parseInt(br.readLine());
+    TreeMap<Integer, Queue<String>> map = new TreeMap<>();
 
-    String[] str = new String[1000001];
-    for(int i = 0; i < N; i++) {
+    while(N-->0){
       StringTokenizer st = new StringTokenizer(br.readLine());
-      int t = Integer.parseInt(st.nextToken());
-      str[t] = new StringBuilder().append(str[t] != null ? str[t] : "").append("\n").append(t).append(" ").append(st.nextToken()).toString();
+      int n = Integer.parseInt(st.nextToken());
+      if(map.containsKey(n)) {
+        map.get(n).add(st.nextToken());
+      } else {
+        map.put(n, new LinkedList<String>());
+        map.get(n).add(st.nextToken());
+      }
     }
-
-      for(int i = 0; i< str.length && N > 0; i++) {
-        if(str[i] != null) {
-          bw.write(str[i].trim());
-          bw.newLine();
-          N--;
-        }
+    for(int key: map.keySet()) {
+      while(map.get(key).size() != 0) {
+        bw.write(key + " ");
+        bw.write(map.get(key).poll());
+        bw.newLine();
+      }
     }
-
     bw.flush();
     bw.close();
     br.close();
