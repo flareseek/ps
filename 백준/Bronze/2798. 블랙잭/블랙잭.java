@@ -9,10 +9,17 @@ public class Main {
 
     int max = 0;
     for(int i = 0; i < A.length-2; i ++) {
+      if(A[i] > N[1]) continue;
       for(int j = i+1; j < A.length-1; j++) {
+        if(A[i]+A[j] > N[1]) continue;
         for(int k = j+1; k < A.length; k++) {
           int t = A[i] + A[j] + A[k];
-          if(t <= N[1] && max < t) max = t;
+          if(t == N[1]) {
+            System.out.println(t);
+            br.close();
+            return;
+          }
+          if(t < N[1] && max < t) max = t;
         }
       }
     }
