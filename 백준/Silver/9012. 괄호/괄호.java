@@ -1,5 +1,7 @@
 import java.io.*;
+import java.util.Stack;
 
+//Stack으로 풀어봄
 public class Main {
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -8,15 +10,17 @@ public class Main {
     int N = Integer.parseInt(br.readLine());
     while(N-->0) {
       char[] C = br.readLine().toCharArray();
-      if(C[0] != '(' || C[C.length-1] != ')' || C.length%2 ==1) bw.write("NO\n");
-      else {
-        int s = 0;
-        for(int i = 0; i < C.length && s >= 0; i++) {
-          if(C[i] == '(') s++;
-          else s--;
+      Stack<Character> stack = new Stack<>();
+      for(int i = 0; i < C.length; i++){
+        if(C[i] == '(') stack.push('(');
+        else {
+          if(stack.isEmpty()) {
+            stack.push(')');
+            break;
+          } else stack.pop();
         }
-        bw.write(s==0 ? "YES\n" : "NO\n");
       }
+      bw.write(stack.isEmpty() ? "YES\n" :"NO\n");
     }
     bw.flush();
     bw.close();
