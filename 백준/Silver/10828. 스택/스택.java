@@ -5,7 +5,6 @@ public class Main {
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    Map<Integer, Integer> map = new HashMap<>();
 
     int N = Integer.parseInt(br.readLine());
     int[] stack = new int[N];
