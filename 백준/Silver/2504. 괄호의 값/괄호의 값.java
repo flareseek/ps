@@ -10,42 +10,23 @@ public class Main {
         for (int i = 0; i < C.length; i++) {
             if (C[i] == '(') stack.push(-2);
             else if (C[i] == '[') stack.push(-3);
-            else if (C[i] == ')') {
+            else {
+                int nn = C[i] == ')' ? 2 : 3;
                 int t = 0;
                 if (stack.isEmpty()) {
                     is = false;
                     break;
                 }
                 int pop = stack.pop();
-                if (pop == -2) {
-                    stack.push(2);
+                if (pop == -nn) {
+                    stack.push(nn);
                     continue;
                 }
                 while (!stack.isEmpty() && pop != -2 && pop != -3) {
                     t += pop;
                     pop = stack.pop();
                 }
-                if (pop == -2) stack.push(t * 2);
-                else {
-                    is = false;
-                    break;
-                }
-            } else {
-                int t = 0;
-                if (stack.isEmpty()) {
-                    is = false;
-                    break;
-                }
-                int pop = stack.pop();
-                if (pop == -3) {
-                    stack.push(3);
-                    continue;
-                }
-                while (!stack.isEmpty() && pop != -2 && pop != -3) {
-                    t += pop;
-                    pop = stack.pop();
-                }
-                if (pop == -3) stack.push(t * 3);
+                if (pop == -nn) stack.push(t * nn);
                 else {
                     is = false;
                     break;
