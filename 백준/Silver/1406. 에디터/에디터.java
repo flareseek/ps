@@ -24,8 +24,7 @@ public class Main {
     }
 
     StringBuilder sb = new StringBuilder();
-    while(!stack.isEmpty()) sb.append(stack.pop());
-    sb.reverse();
+    while(!stack.isEmpty()) tStack.push(stack.pop());
     while(!tStack.isEmpty()) sb.append(tStack.pop());
     System.out.println(sb);
     br.close();
