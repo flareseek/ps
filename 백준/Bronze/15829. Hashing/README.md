@@ -40,3 +40,17 @@
 
  <p>문제에서 주어진 해시함수와 입력으로 주어진 문자열을 사용해 계산한 해시 값을 정수로 출력한다.</p>
 
+## 리뷰
+1 <= L <= 5 범위 케이스에서는 맞았지만 1 <= L <= 50 케이스는 실패했었다. 아마 31^49 수가 long 타입에 다 들어가지 않아서 인듯 싶다. <br>
+그래서 나머지 분배법칙으로 풀었다. <br>
+나머지 분배법칙은 <br>
+$(A\times B) \bmod{M}$ 일 경우 $(A\bmod{M} \times B\bmod{M})\bmod{M}$ 으로 바꿔 쓸 수 있다. <br>
+이는 나머지를 제외한 사칙연산 (+, -, /)에 전부 적용된다.<br>
+
+따라서, 만약 1번째식은<br>
+$$(a_0\times r^0)\bmod{M} = (a_0\bmod{M} \times r^0 \bmod{M})\bmod{M}$$ 로 쓸 수 있다.<br>
+3번째 식은
+$$(a_2\times r^2)\bmod{M} = (a_2\bmod{M} \times r^2 \bmod{M})\bmod{M} = (a_2\bmod{M} \times r^1 \bmod{M} \times r^1 \bmod{M})\bmod{M}$$
+4번째 식은
+$$(a_3\times r^3)\bmod{M} = (a_3\bmod{M} \times r^3 \bmod{M})\bmod{M} = (a_3\bmod{M} \times r^2 \bmod{M} \times r^1 \bmod{M})\bmod{M}$$ 가 된다.<br>
+$r^n\bmod{M}$ 를 변수에 저장해두면 M의 나머지값만 저장하게 된다. 값이 M보다 작게 나오므로 long 타입 내에서 수 저장이 가능하다.
