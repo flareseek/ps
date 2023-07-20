@@ -5,16 +5,15 @@ public class Main {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     final int M = 1234567891;
-
     int N = Integer.parseInt(br.readLine());
     char[] C = br.readLine().toCharArray();
-    long t = 0;
-    long r = 1;
+    long r = 1; //(r^0 Mod M)
+    long sum = 0;
     while(N-->0) {
-      t += (C[C.length-1-N] - 'a' + 1) * r;
-      r *= 31;
+      sum += (C[C.length-1-N]-'a'+1)*r % M;
+      r = r*31%M;
     }
-    System.out.println(t%M);
+    System.out.println(sum%M);
 
     br.close();
   }
