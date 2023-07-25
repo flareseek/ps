@@ -2,8 +2,6 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-enum D {Left, Right, Up, Down}
-
 public class Main {
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,16 +23,17 @@ public class Main {
 
     Deque<Point> snake = new LinkedList<>();
     snake.addFirst(new Point(1, 1));
-    D direction = D.Right;
     Event currentEvent = eventQueue.poll();
+    int direction = 0; // 0 R, 1 D, 2 L, 3 U
+    int[] dx = {1, 0, -1, 0};
+    int[] dy = {0, 1, 0, -1};
+
 
     int timer = 1;
     while(true) {
       Point head = new Point(snake.getFirst().x, snake.getFirst().y);
-      if(direction == D.Right) head.x ++;
-      else if(direction == D.Left) head.x --;
-      else if(direction == D.Up) head.y --;
-      else if(direction == D.Down) head.y ++;
+      head.x += dx[direction];
+      head.y += dy[direction];
 
       if(head.x == 0 || head.x > N || head.y == 0 || head.y > N) {
         System.out.println(timer);
@@ -57,22 +56,8 @@ public class Main {
       snake.addFirst(head);
 
       if(currentEvent != null && currentEvent.time == timer) {
-        if(direction == D.Right) {
-          if(currentEvent.LR.equals("L")) direction = D.Up;
-          else direction = D.Down;
-        }
-        else if(direction == D.Left) {
-          if(currentEvent.LR.equals("L")) direction = D.Down;
-          else direction = D.Up;
-        }
-        else if(direction == D.Up) {
-          if(currentEvent.LR.equals("L")) direction = D.Left;
-          else direction = D.Right;
-        }
-        else if(direction == D.Down) {
-          if(currentEvent.LR.equals("L")) direction = D.Right;
-          else direction = D.Left;
-        }
+        if(currentEvent.LR.equals("L")) direction = (direction + 3) % 4;
+        else direction = (direction + 1) % 4;
         if(!eventQueue.isEmpty()) currentEvent = eventQueue.poll();
         else currentEvent = null;
       }
