@@ -22,11 +22,10 @@ public class Main {
       }
     }
     int day = 0;
-    int n = 0;
     int[] dx = {1, 0, -1, 0}; // R D L U
     int[] dy = {0, 1, 0, -1};
     while (!q.isEmpty()) {
-      n ++;
+      tomato --;
       int[] P = q.poll();
       day = field[P[0]][P[1]];
       for (int i = 0; i < dx.length; i++) {
@@ -37,7 +36,7 @@ public class Main {
         q.add(new int[]{c, r});
       }
     }
-    if (tomato != n) System.out.println(-1);
+    if (tomato != 0) System.out.println(-1);
     else System.out.println(day-1);
     br.close();
   }
