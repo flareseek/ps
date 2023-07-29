@@ -5,38 +5,33 @@ public class Main {
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringTokenizer st = new StringTokenizer(br.readLine());
-
     int N = Integer.parseInt(st.nextToken());
     int M = Integer.parseInt(st.nextToken());
-    boolean[] visited = new boolean[N+1];
-    ArrayList<LinkedList<Integer>> cnn = new ArrayList<>(N+1);
-    for(int i = 0; i <= N; i++) cnn.add(i, new LinkedList<Integer>());
+    boolean[][] graph = new boolean[N][N];
+    boolean[] visited = new boolean[N];
 
-    for(int i = 0; i < M; i++) {
+    while(M-->0) {
       st = new StringTokenizer(br.readLine());
       int f = Integer.parseInt(st.nextToken());
       int t = Integer.parseInt(st.nextToken());
-      cnn.get(f).add(t);
-      cnn.get(t).add(f);
+      graph[f-1][t-1] = graph[t-1][f-1] = true;
     }
+
     int cnt = 0;
-    for(int i = 1; i <= N; i++) {
+    for(int i = 0; i < N; i++){
       if(visited[i]) continue;
-      cnt ++;
-      Queue<Integer> q = new LinkedList<>();
-      q.add(i);
       visited[i] = true;
-      while(!q.isEmpty()) {
-        int p = q.poll();
-        LinkedList<Integer> l = cnn.get(p);
-        for(int j: l) {
-          if(visited[j]) continue;
-          visited[j] = true;
-          q.add(j);
-        }
-      }
+      dfs(graph, visited, i);
+      cnt ++;
     }
     System.out.println(cnt);
     br.close();
+  }
+  public static void dfs(boolean[][] graph, boolean[] visited, int index) {
+    for(int i = 0; i < graph[index].length; i++) {
+      if(!graph[index][i] || visited[i]) continue;
+      visited[i] = true;
+      dfs(graph, visited, i);
+    }
   }
 }
