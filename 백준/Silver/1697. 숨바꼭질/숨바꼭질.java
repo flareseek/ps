@@ -12,23 +12,27 @@ public class Main {
       System.out.println(f - t);
       return;
     }
-
-    HashSet<Integer> set = new HashSet<>();
-    Queue<int[]> q = new LinkedList<>();
-    q.add(new int[]{f, 0});
-    while (!q.isEmpty()) {
-      int[] p = q.poll();
-      if (p[0] < 0 || set.contains(p[0])) continue;
-      if (p[0] == t) {
-        System.out.println(p[1]);
-        return;
-      }
-      set.add(p[0]);
-      if(p[0] > t) q.add(new int[]{p[0] - 1, p[1] + 1});
-      else {
-        q.add(new int[]{p[0] - 1, p[1] + 1});
-        q.add(new int[]{p[0] + 1, p[1] + 1});
-        q.add(new int[]{p[0] * 2, p[1] + 1});
+    boolean[] visited = new boolean[100001];
+    Queue<Integer> q = new LinkedList<>();
+    q.add(f);
+    int cnt = -1;
+    while(true) {
+      cnt ++;
+      int s = q.size();
+      for(int i = 0; i < s; i++) {
+        int p = q.poll();
+        if(visited[p]) continue;
+        visited[p] = true;
+        if(p == t) {
+          System.out.println(cnt);
+          return;
+        }
+        int r = p+1, l = p-1, d = p*2;
+        if(l >= 0) q.add(l);
+        if(p < t) {
+          if(r <= 100000) q.add(r);
+          if(d <= 100000) q.add(d);
+        }
       }
     }
   }
