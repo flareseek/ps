@@ -10,18 +10,16 @@ public class Main {
         for(int i = 0; i < N; i++) ls[i] = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         br.close();
 
-        Arrays.sort(ls, Comparator.comparingInt(a -> a[0]));
+        Arrays.sort(ls, (a, b) -> {
+            if (a[0] == b[0]) return a[1] - b[1];
+            else return a[0] - b[0];
+        });
         PriorityQueue <Integer> pq = new PriorityQueue<>();
         pq.add(ls[0][1]);
-        int max = 0;
         for(int i = 1; i < N; i++) {
-            while(!pq.isEmpty()) {
-                if(ls[i][0] >= pq.peek()) pq.remove();
-                else break;
-            }
+            if (ls[i][0] >= pq.peek()) pq.remove();
             pq.add(ls[i][1]);
-            if (max < pq.size()) max = pq.size();
         }
-        System.out.println(max);
+        System.out.println(pq.size());
     }
 }
