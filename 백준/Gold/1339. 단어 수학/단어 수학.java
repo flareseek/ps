@@ -5,32 +5,19 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         final int N = Integer.parseInt(br.readLine());
-        HashMap<Character, Integer> rank = new HashMap<>();
-        char[][] str = new char[N][];
+        int[] score = new int['Z'-'A'+1];
         for(int i = 0; i < N; i++) {
-            str[i] = br.readLine().toCharArray();
-            int w = 1;
-            for(int c = str[i].length - 1; c >= 0; c--) {
-                rank.put(str[i][c], rank.getOrDefault(str[i][c], 0) + w);
-                w *= 10;
+            char[] C = br.readLine().toCharArray();
+            int d = 1;
+            for(int k = C.length - 1; k >=0; k--) {
+                score[C[k]-'A'] += d;
+                d *= 10;
             }
         }
-        br.close();
-        HashMap<Character, Integer> hash = new HashMap<>();
-        List<Character> keys = new ArrayList<>(rank.keySet());
-        Collections.sort(keys, (a, b) -> rank.get(b) - rank.get(a));
+        Arrays.sort(score);
         int dec = 10;
-        for(char key: keys)
-            hash.put(key, --dec );
-
         int result = 0;
-        for(char[] C: str){
-            int temp = 0;
-            for(char c: C) {
-                temp = temp * 10 + hash.get(c);
-            }
-            result += temp;
-        }
+        for(int i = score.length - 1; i >= 0; i --) result += (--dec) * score[i];
         System.out.println(result);
     }
 }
