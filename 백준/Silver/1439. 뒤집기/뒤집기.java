@@ -12,7 +12,7 @@ public class Main {
         last = c;
       }
     }
-    System.out.println(count > 0 ? count/2 : 0);
+    System.out.println(count/2);
     br.close();
   }
 }
