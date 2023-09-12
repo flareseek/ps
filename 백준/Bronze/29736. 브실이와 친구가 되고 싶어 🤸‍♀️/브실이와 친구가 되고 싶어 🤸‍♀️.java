@@ -13,7 +13,7 @@ public class Main {
     final int X = Integer.parseInt(st.nextToken());
     br.close();
 
-    final int C = K - X > 0 ? K - X : 0;
+    final int C = K - X;
     final int D = K + X;
 
     int f = C < A ? A : C, s = B < D ? B : D;
