@@ -13,14 +13,9 @@ public class Main {
     Arrays.sort(lens);
 
     for (int i = lens.length - 1; i >= 2; i--) {
-      for (int j = i-1; j >= 1; j--) {
-        if (lens[j] * 2 <= lens[i]) break;
-        for (int k = j - 1; k >= 0; k--) {
-          if (lens[i] < lens[j] + lens[k]) {
-            System.out.println((lens[i] + lens[j] + lens[k]));
-            return;
-          }
-        }
+      if (lens[i] < lens[i-1] + lens[i-2]) {
+        System.out.println(lens[i] + lens[i-1] + lens[i-2]);
+        return;
       }
     }
     System.out.println(-1);
