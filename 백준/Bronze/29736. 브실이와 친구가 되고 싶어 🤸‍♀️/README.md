@@ -30,3 +30,7 @@
 
 <p>친구가 될 수 있는 사람이 단 한 명도 없다면 <span data-darkreader-inline-color="" style="color: rgb(231, 76, 60); --darkreader-inline-color: #e95849;"><code>IMPOSSIBLE</code></span>을 출력한다.</p>
 
+### 리뷰
+### 리뷰
+[A, B] 범위와 [K-X, K+X]가 겹치는 부분을 찾는 방법으로 풀이했다. <br>
+각 범위에서 가장 작은 수 끼리 비교해서 큰 수 O를 정하고, 가장 큰 수 끼리 비교해서 작은 수 X를 정한 뒤 , X - O + 1을 하면 결과가 나온다. 이때 결과 값이 음수라면 겹치는 범위가 없으므로 IMPOSSIBLE 출력. <br> 
