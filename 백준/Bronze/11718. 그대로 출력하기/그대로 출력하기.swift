@@ -1,5 +1,5 @@
 var str: String? = readLine()
-while str != nil {
-    print(str!)
+while let st = str {
+    print(st)
     str = readLine()
 }
