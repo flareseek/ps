@@ -2,37 +2,37 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-  public static void main(String[] args) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    String push = "+\n", pop = "-\n", no = "NO";
-    int N = Integer.parseInt(br.readLine());
-    StringBuilder sb = new StringBuilder();
-    Stack<Integer> stack = new Stack<>();
-    int last = 0;
-    while(N-->0) {
-      int n = Integer.parseInt(br.readLine());
-      if(last <= n) {
-        while(last < n) {
-          stack.push(++last);
-          sb.append(push);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        String push = "+\n";
+        String pop = "-\n";
+        String no = "NO\n";
+
+        Stack<Integer> st = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        int last = 0;
+        while(N-->0) {
+            int n = Integer.parseInt(br.readLine());
+            if (last < n) {
+                while (last < n) {
+                    st.push(++last);
+                    sb.append(push);
+                }
+                st.pop();
+                sb.append(pop);
+            } else if (last == n || (!st.isEmpty() && st.peek() == n)) {
+                st.pop();
+                sb.append(pop);
+            } else if (!st.isEmpty() && st.peek() > n){
+                sb.setLength(0);
+                sb.append(no);
+                break;
+            }
         }
-        stack.pop();
-        sb.append(pop);
-      } else {
-        int t = 0;
-        if (stack.isEmpty() || (t=stack.pop())<n) {
-          sb.setLength(0);
-          sb.append(no);
-          break;
-        }
-        if(t == n) sb.append(pop);
-        else {
-          while(stack.pop() != n) sb.append(pop);
-          sb.append(pop);
-        }
-      }
+        System.out.print(sb);
+        br.close();
     }
-    System.out.println(sb);
-    br.close();
-  }
 }
