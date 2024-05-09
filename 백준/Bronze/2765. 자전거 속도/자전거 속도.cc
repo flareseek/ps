@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-const double PI = acosl(-1);
+const double PI = std::acos(-1);
 int main(void) {
     for(int i = 1;; i++) {
         double a, c;
