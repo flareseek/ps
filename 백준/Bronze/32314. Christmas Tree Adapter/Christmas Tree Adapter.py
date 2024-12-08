@@ -1,0 +1,5 @@
+a = int(input())
+t = input().split()
+w = int(t[0])
+v = int(t[1])
+print(1 if w/v>=a else 0)
