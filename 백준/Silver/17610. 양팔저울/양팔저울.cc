@@ -31,7 +31,6 @@ int main(void) {
     S += g[i];
   }
   rc(0, 0);
-  sort(result, result + S + 1);
   int cnt = 0;
   for (int i = 1; i <= S; i++)
     if (!result[i]) cnt ++;
