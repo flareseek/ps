@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int burgers[1000], sides[1000], bevers[1000];
+int arr[1000];
 int total, m, t;
 
 void input(int* arr, int n) {
@@ -25,9 +25,9 @@ int main(void) {
   cin >> B >> C >> D;
   m = min({B, C, D});
 
-  input(burgers, B);
-  input(sides, C);
-  input(bevers, D);
+  input(arr, B);
+  input(arr, C);
+  input(arr, D);
 
   cout << total << "\n" << ((total - t) + (int)(t*0.9));
   return 0;
