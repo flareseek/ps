@@ -8,9 +8,10 @@ int main(void) {
 
   int n, cnt = 0;
   cin >> n;
-  for (int i = 1; i <= n; i++)
-    for (int j = i; j <=n; j++)
-      if (i*j <= n) cnt ++;
+  for (int i = 1; i <= n; i++) {
+    if (i*i > n) break;
+    for (int j = i; j <=n; j++) if (i*j <= n) cnt ++;
+  }
 
   cout << cnt;
   return 0;
